@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS courier;
+DROP TABLE IF EXISTS customer;
+DROP TABLE IF EXISTS order_item;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS restaurant_menu_item;
+DROP TABLE IF EXISTS restaurant;
+DROP TABLE IF EXISTS users;

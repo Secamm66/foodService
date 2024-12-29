@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: eureka-service
+
+  # т.к. это не клиент, то убираем лишние настройки (регистрация веб сервисов и пр.)
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    # url, куда будет происходить регистрация микросервисов
+    service-url:
+      defaultZone: http://localhost:7777/eureka
+
+  # отключение лишних логов, т.к. не тут не будем создавать и вызывать микросервисы
+logging:
+  level:
+    com:
+      netflix:
+        eureka: OFF
+        discovery: OFF
+
+  # более короткое отображение логов
+  pattern:
+    console: "%C{1.} [%-5level] %d{HH:mm:ss} - %msg%n"
+
+server:
+  port: 7777

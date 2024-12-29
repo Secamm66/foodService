@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+      - id: order
+        uri: lb://order-service
+        predicates:
+          - Path=/api/v1/orders/**
+      - id: kitchen
+        uri: lb://kitchen-service
+        predicates:
+          - Path=/api/v1/restaurants/**
+      - id: delivery
+        uri: lb://delivery-service
+        predicates:
+          - Path=/api/v1/deliveries/**
+  main:
+    web-application-type: reactive
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7777/eureka
+
+logging:
+  pattern:
+    console: "%C{1.} [%-5level] %d{HH:mm:ss} - %msg%n"
+
+server:
+  port: 8080

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <!-- локальный ченджлог  -->
+    <changeSet id="2024-09-21 00:02:00" author="v.ershov">
+        <!-- relativeToChangelogFile - позволяет указывать путь относительно той папки, где лежит ченджлог  -->
+        <sqlFile path="v1.0.0/create/create_courier.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="v1.0.0/create/create_customer.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="v1.0.0/create/create_users.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="v1.0.0/create/create_restaurant.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="v1.0.0/create/create_restaurant_menu_item.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="v1.0.0/create/create_orders.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="v1.0.0/create/create_order_item.sql" relativeToChangelogFile="true"/>
+
+        <rollback>
+            <sqlFile path="v1.0.0/rollback/init_rollback.sql" relativeToChangelogFile="true"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

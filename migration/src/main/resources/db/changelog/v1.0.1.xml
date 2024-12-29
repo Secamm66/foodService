@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <!-- локальный ченджлог  -->
+    <changeSet id="2024-09-21 00:14:04" author="v.ershov">
+        <sqlFile path="v1.0.1/insert_testdata_courier.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="v1.0.1/insert_testdata_restaurant.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="v1.0.1/insert_testdata_restaurant_menu_item.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+</databaseChangeLog>
