@@ -18,7 +18,7 @@ target/
 *.iws
 *.iml
 *.ipr
-src/main/resources/db/local/liquibase.yml
+src/main/resources/db/local/liquibase.properties
 
 ### NetBeans ###
 /nbproject/private/
