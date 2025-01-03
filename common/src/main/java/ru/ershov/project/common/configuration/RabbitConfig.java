@@ -41,6 +41,7 @@ public class RabbitConfig {
     //AmqpAdmin занимается обслуживанием очередей, обменника, сообщений
     @Bean
     public AmqpAdmin amqpAdmin() {
+        System.out.println("RabbitAdmin initialized in Common!");
         return new RabbitAdmin(connectionFactory());
     }
 
