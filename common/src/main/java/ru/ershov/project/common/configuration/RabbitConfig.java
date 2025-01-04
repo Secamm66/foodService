@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-//EnableRabbit - обязательная анотация, без нее рэбит не будет работать
 @EnableRabbit
 @Configuration
 public class RabbitConfig {
@@ -29,24 +28,40 @@ public class RabbitConfig {
     @Value("${spring.rabbitmq.password}")
     private String rabbitPassword;
 
-    //Бин создания соединения с сервером рэбит
+    /**
+     * Создаёт бин {@link ConnectionFactory} для подключения к RabbitMQ.
+     * Настраивает автоматическое восстановление соединения и интервал восстановления сети.
+     *
+     * @return {@link ConnectionFactory} для работы с RabbitMQ.
+     */
     @Bean
     public ConnectionFactory connectionFactory() {
         CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory(rabbitHost);
         cachingConnectionFactory.setUsername(rabbitUsername);
         cachingConnectionFactory.setPassword(rabbitPassword);
+
+        cachingConnectionFactory.getRabbitConnectionFactory().setAutomaticRecoveryEnabled(true);
+        cachingConnectionFactory.getRabbitConnectionFactory().setNetworkRecoveryInterval(5000);
+
         return cachingConnectionFactory;
     }
 
-    //AmqpAdmin занимается обслуживанием очередей, обменника, сообщений
+    /**
+     * Создаёт бин {@link AmqpAdmin} для управления очередями, обменниками и привязками в RabbitMQ.
+     *
+     * @return {@link AmqpAdmin} для административных операций.
+     */
     @Bean
     public AmqpAdmin amqpAdmin() {
-        System.out.println("RabbitAdmin initialized in Common!");
         return new RabbitAdmin(connectionFactory());
     }
 
-    //RabbitTemplate основной класс для отправки сообщения, так же имеет гибкие настройки, такие как
-    //явное указание типа конвертации.
+    /**
+     * Создаёт бин {@link RabbitTemplate} для отправки и получения сообщений из RabbitMQ.
+     * Настраивает конвертацию сообщений в JSON с использованием {@link Jackson2JsonMessageConverter}.
+     *
+     * @return {@link RabbitTemplate} для работы с сообщениями.
+     */
     @Bean
     public RabbitTemplate rabbitTemplate() {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
@@ -54,7 +69,13 @@ public class RabbitConfig {
         return rabbitTemplate;
     }
 
-    //Настройка листенера, чтобы автоматически конвертировался json в объект
+    /**
+     * Создаёт бин {@link SimpleRabbitListenerContainerFactory} для настройки контейнера слушателей RabbitMQ.
+     * Настраивает конвертацию сообщений в JSON с использованием {@link Jackson2JsonMessageConverter}.
+     *
+     * @param connectionFactory фабрика соединений, используемая контейнером.
+     * @return {@link SimpleRabbitListenerContainerFactory} для обработки входящих сообщений.
+     */
     @Bean
     public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
@@ -63,7 +84,12 @@ public class RabbitConfig {
         return factory;
     }
 
-    //Настройка objectMapper
+    /**
+     * Создаёт бин {@link ObjectMapper} для сериализации и десериализации JSON.
+     * Настраивает стратегию именования полей в snake_case и добавляет поддержку Java 8 Date/Time API.
+     *
+     * @return {@link ObjectMapper} для работы с JSON.
+     */
     @Bean
     public ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -72,7 +98,12 @@ public class RabbitConfig {
         return objectMapper;
     }
 
-    //Непосредственно конвертер
+    /**
+     * Создаёт бин {@link Jackson2JsonMessageConverter} для конвертации сообщений в JSON и обратно.
+     * Использует настроенный {@link ObjectMapper} для поддержки snake_case и Java 8 Date/Time API.
+     *
+     * @return {@link Jackson2JsonMessageConverter} для конвертации сообщений.
+     */
     @Bean
     public Jackson2JsonMessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter(objectMapper());

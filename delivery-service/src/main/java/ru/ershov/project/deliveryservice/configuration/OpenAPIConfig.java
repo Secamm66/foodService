@@ -10,6 +10,7 @@ import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.GroupedOpenApi;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -34,12 +35,12 @@ public class OpenAPIConfig {
     }
 
     @Bean
-    public GroupedOpenApi customOpenApi() {
+    public GroupedOpenApi customOpenApi(@Value("${swagger.server-url}") String serverUrl) {
         return GroupedOpenApi.builder()
                 .group("delivery-service")
                 .pathsToMatch("/api/v1/deliveries/**")
                 .addOpenApiCustomiser(openApi -> openApi
-                        .servers(List.of(new Server().url("http://localhost:8080/"))))
+                        .servers(List.of(new Server().url(serverUrl))))
                 .build();
     }
 }

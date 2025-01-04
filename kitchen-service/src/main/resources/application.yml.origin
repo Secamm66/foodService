@@ -40,6 +40,9 @@ springdoc:
   api-docs:
     path: /api/v1/restaurants/v3/api-docs
 
+swagger:
+  server-url:
+
 server:
   port: 0
 

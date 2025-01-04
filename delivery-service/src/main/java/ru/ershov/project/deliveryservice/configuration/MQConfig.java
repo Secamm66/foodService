@@ -13,7 +13,7 @@ import static ru.ershov.project.common.constants.RabbitMQConstants.*;
 public class MQConfig {
 
     @Bean
-    public Declarables kitchenServiceQueues() {
+    public Declarables deliveryServiceQueues() {
         Queue deliveryToNotificationQueue = new Queue(DELIVERY_TO_NOTIFICATION_QUEUE, false);
         TopicExchange orderStatusExchange = new TopicExchange(ORDER_STATUS_EXCHANGE);
 
