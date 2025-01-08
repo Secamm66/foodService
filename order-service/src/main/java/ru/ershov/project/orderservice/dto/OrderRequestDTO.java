@@ -10,11 +10,11 @@ import java.util.List;
 @Schema(description = "ДТО для создания нового заказа")
 public class OrderRequestDTO {
 
-    @Schema(description = "Название ресторана")
+    @Schema(description = "Id ресторана")
     private Long restaurantId;
 
     @Valid
-    @Schema(description = "Список позиций меню")
+    @Schema(description = "Список позиций меню в заказе")
     private List<MenuItemsRequestDTO> menuItems;
 
 }

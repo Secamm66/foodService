@@ -8,10 +8,10 @@ import java.util.List;
 
 @Data
 @Accessors(chain = true)
-@Schema(description = "ДТО, формирующее список заказов")
+@Schema(description = "ДТО, формирующее список заказов авторизованного клиента")
 public class OrderListGetResponse {
 
-    @Schema(description = "Список заказов")
+    @Schema(description = "Список заказов авторизованного клиента")
     private List<OrderDTOGetResponse> orders;
 
     @Schema(description = "Номер страницы")
