@@ -16,7 +16,7 @@ public class OrderDTOGetResponse {
     @Schema(description = "Id заказа")
     private Long id;
 
-    @Schema(description = "Ресторан, откуда заказывается еда")
+    @Schema(description = "Ресторан, откуда выполняется заказ")
     private RestaurantResponseDTO restaurant;
 
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")

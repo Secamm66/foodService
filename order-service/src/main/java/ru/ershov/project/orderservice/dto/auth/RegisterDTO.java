@@ -16,7 +16,7 @@ public class RegisterDTO {
 
     @NotEmpty(message = "Укажите username")
     @Size(min = 3, max = 50, message = "username может содержать от 3 до 50 символов")
-    @Schema(description = "username клиента")
+    @Schema(description = "Username клиента")
     private String username;
 
     @NotEmpty(message = "Укажите пароль")

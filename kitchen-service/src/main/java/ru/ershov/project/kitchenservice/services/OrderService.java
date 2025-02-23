@@ -69,8 +69,8 @@ public class OrderService {
                 .setMessage("Order status from id=" + orderId + " changed to " + newOrderStatus);
     }
 
-    private List<Order> getOrdersByRestaurantId(Long restaurantId, List<OrderStatus> OrderStatuses, Pageable pageable) {
-        return orderRepository.findAllByRestaurantIdAndStatusIn(restaurantId, OrderStatuses, pageable);
+    private List<Order> getOrdersByRestaurantId(Long restaurantId, List<OrderStatus> orderStatuses, Pageable pageable) {
+        return orderRepository.findAllByRestaurantIdAndStatusIn(restaurantId, orderStatuses, pageable);
     }
 
     private Order getOrderById(Long orderId) {
